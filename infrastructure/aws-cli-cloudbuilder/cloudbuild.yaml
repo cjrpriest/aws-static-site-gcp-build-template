@@ -1,0 +1,15 @@
+steps:
+  
+# build the docker image
+- name: gcr.io/cloud-builders/docker
+  args:
+  - build
+  - -t
+  - gcr.io/$PROJECT_ID/aws-cli
+  - .
+
+# push the docker image
+images:
+- gcr.io/$PROJECT_ID/aws-cli
+
+
