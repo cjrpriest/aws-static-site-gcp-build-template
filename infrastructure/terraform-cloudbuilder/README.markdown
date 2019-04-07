@@ -1,3 +1,7 @@
+### NOTE
+- This cloud builder was detached from commit 3ade8655840acd7c06ce4c5a41e5139de76173eb of https://github.com/GoogleCloudPlatform/cloud-builders-community
+- It has been modified to add support for [jq](https://stedolan.github.io/jq/) (so it's possible to extract data from terraform output)
+
 # [Terraform](https://www.terraform.io/docs) cloud builder
 
 ## Terraform cloud builder
