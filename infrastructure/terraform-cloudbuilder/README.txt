@@ -1,2 +1,0 @@
-- taken from commit 3ade8655840acd7c06ce4c5a41e5139de76173eb of https://github.com/GoogleCloudPlatform/cloud-builders-community
-- modified to add support for jq (so it's possible to extract data from terraform output)
