@@ -105,7 +105,7 @@
     },
     "secrets" : [
         {
-            "kmsKeyName" : "projects/chrispriest-web/locations/global/keyRings/aws/cryptoKeys/deploy",
+            "kmsKeyName" : "projects/[GCP_PROJECT_NAME]/locations/global/keyRings/aws/cryptoKeys/deploy",
             "secretEnv" : {
                 "AWS_SECRET_ACCESS_KEY" : "CiQAQit3DVh4e2NkUYGdbSG2a3KvFf8OiEs8t5gkzeeTBXPlrw8SUQCUXIHdsmM3SNSVnZ2RoD+4EknLY7HQEOq22YecXXySpSoTw9xPD4OUD9xPYHwNyJIA4SkOVv/QuuA9EfVCTYFWl0u846oNnCsovHfGVIDfWg=="
             }
