@@ -16,7 +16,7 @@
                 "--ciphertext-file=gcs-terraform-state-credentials.json.enc",
                 "--plaintext-file=gcs-terraform-state-credentials.json",
                 "--location=global",
-                "--keyring=gcp",
+                "--keyring=gcs",
                 "--key=deploy"
             ],
             "dir" : "infrastructure"
