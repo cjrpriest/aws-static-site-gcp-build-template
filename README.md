@@ -56,13 +56,13 @@ Google Cloud Build provides the compute and build infrastructure required to pro
 
 ### Google Cryptographic Keys / Key Management Service
 
+In order to manage secrets, the Google Key Management Service is used. This enables us to encrypt sensitive information, and 
+
 TODO (AWS & GCS creds)
 
 ### Google Cloud Storage
 
-TODO (terraform state)
-
-TODO: Why use GCP Cloud Storage and not AWS S3? Because GCP Cloud Storage supports locking, which we need to ensure against lost update problems.
+Google Cloud Storage is used to store the Terraform state (using the Terraform GCS backend). 
 
 ### Terraform
 
@@ -119,6 +119,9 @@ These steps should be enough to take you from nothing to a fully working GCP Clo
 1. Encrypt the GCS bucket key file using the previously generated CryptoKey for GCS
     1. Encrypt the file: `gcloud kms encrypt --plaintext-file=gcs-terraform-state-credentials.json --ciphertext-file=gcs-terraform-state-credentials.json.enc --location=global --keyring=gcs --key=deploy`
     1. Destroy the original: `rm gcs-terraform-state-credentials.json`
+1. Encrypt the AWS Secret Access Key using the previously generated CryptoKey for AWS
+    1. Encrypt the secret access key (Note: use the `SecretAccessKey` obtained earlier when you created the `gcp-cloud-build-user` user: `echo -n SecretAccessKey | gcloud kms encrypt --plaintext-file=- --ciphertext-file=- --location=global --keyring=aws --key=deploy | base64`
+    1. Capture the output for use as `[ENCRYPTED_AWS_SECRET_KEY]` later
 1. Build the Terraform and AWS CLI Google Cloud Builders. Once built, they will be available Google Build steps
     1. Change directory to `infrastructure/terraform-cloudbuilder` and run `build.sh`
     1. Change directory to `infrastructure/aws-cli-cloudbuilder` and run `build.sh`
@@ -132,7 +135,6 @@ These steps should be enough to take you from nothing to a fully working GCP Clo
     
 1. Create a credentials file for the GCS account
 1. Encrypt the  
-1. foods
 
 ### Configuration
 
@@ -143,6 +145,8 @@ The CI/CD pipeline is configured in `cloudbuild.json` in the root of your repo. 
 | `[GCP_PROJECT_ID]` | Your GCP project ID |
 | `[_TF_STATE_BUCKET]` | The name of the GCP Storage bucket that will be used to store Terraform state |
 | `[AWS_ACCESS_KEY_ID]` | The AWS access key associated with the AWS user `gcp-cloud-build-user` |
+| `[ENCRYPTED_AWS_SECRET_KEY]` | The encrypted and base64 encoded secret key associated with the AWD user `gcp-cloud-build-user` |
+| `[WEBSITE_DOMAIN]` | TODO
 
 1. Configure the name of the GCS bucket that will be used to store Terraform state
 1. 
