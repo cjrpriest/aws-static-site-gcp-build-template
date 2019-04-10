@@ -38,12 +38,12 @@
             "entrypoint": "sh",
             "args" : [
                 "-c",
-                "terraform plan -var branch=$(cat ../_SANE_BRANCH_NAME)"
+                "terraform plan -var branch=$(cat ../_SANE_BRANCH_NAME) -var website_domain=$_WEBSITE_DOMAIN"
             ],
             "dir" : "infrastructure",
             "env" : [
                 "GOOGLE_APPLICATION_CREDENTIALS=/workspace/infrastructure/gcs-terraform-state-credentials.json",
-                "AWS_ACCESS_KEY_ID=AKIAJBDUQQPBV536ZWGQ"
+                "AWS_ACCESS_KEY_ID=$_AWS_ACCESS_KEY_ID"
             ],
             "secretEnv" : [
                 "AWS_SECRET_ACCESS_KEY"
@@ -54,12 +54,12 @@
             "entrypoint": "sh",
             "args" : [
                 "-c",
-                "terraform apply -auto-approve -var branch=$(cat ../_SANE_BRANCH_NAME)"
+                "terraform apply -auto-approve -var branch=$(cat ../_SANE_BRANCH_NAME) -var website_domain=$_WEBSITE_DOMAIN"
             ],
             "dir" : "infrastructure",
             "env" : [
                 "GOOGLE_APPLICATION_CREDENTIALS=/workspace/infrastructure/gcs-terraform-state-credentials.json",
-                "AWS_ACCESS_KEY_ID=AKIAJBDUQQPBV536ZWGQ"
+                "AWS_ACCESS_KEY_ID=$_AWS_ACCESS_KEY_ID"
             ],
             "secretEnv" : [
                 "AWS_SECRET_ACCESS_KEY"
@@ -93,7 +93,7 @@
                 "aws s3 sync web/ s3://$(cat _FRONT_END_HOST) --acl public-read"
             ],
             "env" : [
-                "AWS_ACCESS_KEY_ID=AKIAJBDUQQPBV536ZWGQ"
+                "AWS_ACCESS_KEY_ID=$_AWS_ACCESS_KEY_ID"
             ],
             "secretEnv" : [
                 "AWS_SECRET_ACCESS_KEY"
@@ -101,13 +101,15 @@
         }
     ],
     "substitutions" : {
-        "_TF_STATE_BUCKET": "chrispriest-web_terraform_state"
+        "_TF_STATE_BUCKET": "[TF_STATE_BUCKET]",
+        "_WEBSITE_DOMAIN": "[WEBSITE_DOMAIN]",
+        "_AWS_ACCESS_KEY_ID" : "[AWS_ACCESS_KEY_ID]"
     },
     "secrets" : [
         {
             "kmsKeyName" : "projects/[GCP_PROJECT_NAME]/locations/global/keyRings/aws/cryptoKeys/deploy",
             "secretEnv" : {
-                "AWS_SECRET_ACCESS_KEY" : "CiQAQit3DVh4e2NkUYGdbSG2a3KvFf8OiEs8t5gkzeeTBXPlrw8SUQCUXIHdsmM3SNSVnZ2RoD+4EknLY7HQEOq22YecXXySpSoTw9xPD4OUD9xPYHwNyJIA4SkOVv/QuuA9EfVCTYFWl0u846oNnCsovHfGVIDfWg=="
+                "AWS_SECRET_ACCESS_KEY" : "aws_secret_key"
             }
         }
     ]

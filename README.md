@@ -56,9 +56,7 @@ Google Cloud Build provides the compute and build infrastructure required to pro
 
 ### Google Cryptographic Keys / Key Management Service
 
-In order to manage secrets, the Google Key Management Service is used. This enables us to encrypt sensitive information, and 
-
-TODO (AWS & GCS creds)
+In order to manage secrets, the Google Key Management Service is used. This enables us to encrypt sensitive information, and then include it in build scripts and repos etc
 
 ### Google Cloud Storage
 
@@ -130,11 +128,7 @@ These steps should be enough to take you from nothing to a fully working GCP Clo
     1. Choose your source repository hosting option. This template has only been tested with Github, but I suspect that other hosting options will not be problematic
     1. Authenticate, select your repo.
     1. For Trigger settings, take note of your selections, but you can likely leave almost all settings as their default. Be sure to change the Build configuration to `Cloud Build configuration file (yaml or json)` and change the Cloud Build configuration file location to `/cloudbuild.json`
-    1. Click Create Trigger to complete the trigger creation process
-1. 
-    
-1. Create a credentials file for the GCS account
-1. Encrypt the  
+    1. Click Create Trigger to complete the trigger creation process    
 
 ### Configuration
 
@@ -143,10 +137,8 @@ The CI/CD pipeline is configured in `cloudbuild.json` in the root of your repo. 
 | Configuration Item | Description |
 | --- | --- |
 | `[GCP_PROJECT_ID]` | Your GCP project ID |
-| `[_TF_STATE_BUCKET]` | The name of the GCP Storage bucket that will be used to store Terraform state |
+| `[TF_STATE_BUCKET]` | The name of the GCP Storage bucket that will be used to store Terraform state |
 | `[AWS_ACCESS_KEY_ID]` | The AWS access key associated with the AWS user `gcp-cloud-build-user` |
 | `[ENCRYPTED_AWS_SECRET_KEY]` | The encrypted and base64 encoded secret key associated with the AWD user `gcp-cloud-build-user` |
-| `[WEBSITE_DOMAIN]` | TODO
+| `[WEBSITE_DOMAIN]` | The domain of the website that you are deploying to |
 
-1. Configure the name of the GCS bucket that will be used to store Terraform state
-1. 
