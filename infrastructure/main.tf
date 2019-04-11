@@ -6,8 +6,9 @@ locals {
   environment_name = "${var.branch == "master" ? "prod" :
                         var.branch == "develop" ? "beta" : var.branch}"
 
-  environment_host = "${local.environment_name == "prod" ? "chrisprie.st" :
-                        local.environment_name == "beta" ? "beta.chrisprie.st" : format("%s.environments.chrisprie.st", local.environment_name)}"
+  environment_host = "${local.environment_name == "prod" ? var.website_domain :
+                        local.environment_name == "beta" ? format("beta.%s", var.website_domain) :
+                        format("%s.environments.%s", local.environment_name, var.website_domain)}"
 }
 
 module "front_end" {
