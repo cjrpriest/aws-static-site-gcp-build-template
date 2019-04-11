@@ -38,7 +38,7 @@
             "entrypoint": "sh",
             "args" : [
                 "-c",
-                "terraform plan -var branch=$(cat ../_SANE_BRANCH_NAME) -var website_domain=$_WEBSITE_DOMAIN"
+                "terraform plan -var branch=$(cat ../_SANE_BRANCH_NAME) -var website_domain=$_WEBSITE_DOMAIN -var hosted_zone_id=$_HOSTED_ZONE_ID"
             ],
             "dir" : "infrastructure",
             "env" : [
@@ -54,7 +54,7 @@
             "entrypoint": "sh",
             "args" : [
                 "-c",
-                "terraform apply -auto-approve -var branch=$(cat ../_SANE_BRANCH_NAME) -var website_domain=$_WEBSITE_DOMAIN"
+                "terraform apply -auto-approve -var branch=$(cat ../_SANE_BRANCH_NAME) -var website_domain=$_WEBSITE_DOMAIN -var hosted_zone_id=$_HOSTED_ZONE_ID"
             ],
             "dir" : "infrastructure",
             "env" : [
@@ -103,7 +103,8 @@
     "substitutions" : {
         "_TF_STATE_BUCKET": "[TF_STATE_BUCKET]",
         "_WEBSITE_DOMAIN": "[WEBSITE_DOMAIN]",
-        "_AWS_ACCESS_KEY_ID" : "[AWS_ACCESS_KEY_ID]"
+        "_AWS_ACCESS_KEY_ID" : "[AWS_ACCESS_KEY_ID]",
+        "_HOSTED_ZONE_ID" : "[HOSTED_ZONE_ID]"
     },
     "secrets" : [
         {
