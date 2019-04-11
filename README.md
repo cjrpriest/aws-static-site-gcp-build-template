@@ -142,3 +142,5 @@ The CI/CD pipeline is configured in `cloudbuild.json` in the root of your repo. 
 | `[ENCRYPTED_AWS_SECRET_KEY]` | The encrypted and base64 encoded secret key associated with the AWD user `gcp-cloud-build-user` |
 | `[WEBSITE_DOMAIN]` | The domain of the website that you are deploying to |
 | `[HOSTED_ZONE_ID]` | The ID of the hosted zone in Route 53 relating to your root domain name |
+| `[ACM_CERTIFICATE_ARN]` | The ARN of the certificate used for SSL termination in CloudFront | 
+
